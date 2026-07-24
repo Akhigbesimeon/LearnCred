@@ -1,59 +1,88 @@
 import { Platform, StyleSheet } from 'react-native';
 
 export const colors = {
-  ink: '#0F172A',
-  slate: '#475569',
-  faded: '#64748B',
-  muted: '#94A3B8',
-  line: '#E2E8F0',
-  hairline: '#F1F5F9',
-  paper: '#F8FAFC',
-  indigo: '#4F46E5',
-  indigoTint: '#EEF2FF',
+  ink: '#1F1B16',
+  paper: '#F6F1E7',
+  surface: '#FDFBF6',
+  green: '#1A5C45',
+  greenDeep: '#123E30',
+  stamp: '#B03B33',
+  line: '#DCD3C1',
+  hairline: '#EAE4D6',
+  faded: '#7A7160',
+  muted: '#A79C88',
+};
+
+export const fonts = {
+  serif: Platform.select({
+    web: 'Georgia, "Times New Roman", serif',
+    ios: 'Georgia',
+    default: 'serif',
+  }),
+  mono: Platform.select({
+    web: '"SF Mono", "Cascadia Mono", Consolas, Menlo, monospace',
+    ios: 'Menlo',
+    default: 'monospace',
+  }),
 };
 
 export const ui = StyleSheet.create({
   card: {
-    backgroundColor: '#fff',
-    borderRadius: 24,
-    padding: 40,
+    backgroundColor: colors.surface,
+    borderRadius: 6,
     borderWidth: 1,
-    borderColor: colors.hairline,
-    boxShadow: '0 12px 32px rgba(15, 23, 42, 0.04)',
+    borderColor: colors.line,
+    padding: 36,
   },
   title: {
-    fontSize: 24,
-    fontWeight: '800',
+    fontFamily: fonts.serif,
+    fontSize: 26,
     color: colors.ink,
-    letterSpacing: -0.5,
   },
   subtitle: {
     fontSize: 15,
     color: colors.faded,
-    marginTop: 6,
+    marginTop: 8,
     marginBottom: 32,
     lineHeight: 22,
   },
   label: {
-    fontSize: 12,
+    fontSize: 11,
     fontWeight: '700',
-    color: colors.slate,
+    color: colors.faded,
     marginBottom: 8,
     textTransform: 'uppercase',
-    letterSpacing: 0.5,
+    letterSpacing: 1,
   },
   input: {
     backgroundColor: colors.paper,
     borderWidth: 1,
     borderColor: colors.line,
-    borderRadius: 12,
-    paddingHorizontal: 16,
-    paddingVertical: 14,
+    borderRadius: 6,
+    paddingHorizontal: 14,
+    paddingVertical: 12,
     color: colors.ink,
     fontSize: 15,
   },
-  // Fonts
+
+  // Buttons
   mono: {
-    fontFamily: Platform.select({ ios: 'Menlo', android: 'monospace', default: 'monospace' }),
+    fontFamily: fonts.mono,
+  },
+  button: {
+    backgroundColor: colors.green,
+    borderRadius: 6,
+    paddingVertical: 14,
+    paddingHorizontal: 24,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  buttonText: {
+    color: colors.paper,
+    fontWeight: '600',
+    fontSize: 15,
+  },
+  buttonDisabled: {
+    opacity: 0.5,
   },
 });
