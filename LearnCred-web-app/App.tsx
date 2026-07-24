@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { CONTRACT_ADDRESS, shortAddress } from './src/contract';
 import ExplorerScreen from './src/screens/ExplorerScreen';
 import IssueScreen from './src/screens/IssueScreen';
 import { colors, fonts } from './src/theme';
@@ -7,13 +8,15 @@ import { colors, fonts } from './src/theme';
 export default function App() {
   const [tab, setTab] = useState<'lookup' | 'issue'>('lookup');
 
+  const contractLabel =
+    CONTRACT_ADDRESS.length === 42 ? shortAddress(CONTRACT_ADDRESS) : CONTRACT_ADDRESS;
+
   return (
     <ScrollView contentContainerStyle={styles.page}>
       <View style={styles.header}>
-        <View>
-          <Text style={styles.wordmark}>LearnCred</Text>
-          <Text style={styles.eyebrow}>CREDENTIAL REGISTRY · SEPOLIA</Text>
-        </View>
+        <Text style={styles.wordmark}>
+          LearnCred<Text style={styles.cursor}>_</Text>
+        </Text>
 
         <View style={styles.tabs}>
           <TouchableOpacity
@@ -35,12 +38,19 @@ export default function App() {
         </View>
       </View>
 
+      <View style={styles.statusLine}>
+        <View style={styles.dot} />
+        <Text style={styles.statusText}>SEPOLIA TESTNET</Text>
+        <Text style={styles.statusSep}>·</Text>
+        <Text style={styles.statusText}>CONTRACT {contractLabel}</Text>
+      </View>
+
       <View style={styles.content}>
         {tab === 'lookup' ? <ExplorerScreen /> : <IssueScreen />}
       </View>
 
       <Text style={styles.footer}>
-        Every record here is public — anyone can verify it on Sepolia.
+        every record is public — anyone can verify it on sepolia
       </Text>
     </ScrollView>
   );
@@ -49,7 +59,7 @@ export default function App() {
 const styles = StyleSheet.create({
   page: {
     flexGrow: 1,
-    backgroundColor: colors.paper,
+    backgroundColor: colors.bg,
     alignItems: 'center',
     paddingBottom: 64,
   },
@@ -58,42 +68,72 @@ const styles = StyleSheet.create({
     maxWidth: 720,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'flex-end',
+    alignItems: 'center',
     paddingHorizontal: 20,
-    paddingTop: 36,
-    paddingBottom: 28,
+    paddingTop: 32,
+    paddingBottom: 18,
   },
   wordmark: {
-    fontFamily: fonts.serif,
-    fontSize: 28,
-    color: colors.ink,
-  },
-  eyebrow: {
     fontFamily: fonts.mono,
-    fontSize: 10,
-    letterSpacing: 2,
-    color: colors.green,
-    marginTop: 4,
+    fontSize: 20,
+    fontWeight: '700',
+    color: colors.text,
+  },
+  cursor: {
+    color: colors.cyan,
   },
   tabs: {
     flexDirection: 'row',
-    gap: 24,
+    gap: 22,
   },
   tab: {
-    paddingBottom: 6,
+    paddingBottom: 5,
     borderBottomWidth: 2,
     borderBottomColor: 'transparent',
   },
   tabActive: {
-    borderBottomColor: colors.green,
+    borderBottomColor: colors.cyan,
   },
   tabLabel: {
-    fontSize: 15,
-    fontWeight: '600',
+    fontFamily: fonts.mono,
+    fontSize: 12,
+    letterSpacing: 1.5,
+    textTransform: 'uppercase',
     color: colors.faded,
   },
   tabLabelActive: {
-    color: colors.ink,
+    color: colors.cyan,
+  },
+  statusLine: {
+    width: '100%',
+    maxWidth: 720,
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    marginBottom: 22,
+    borderTopWidth: 1,
+    borderBottomWidth: 1,
+    borderColor: colors.hairline,
+  },
+  dot: {
+    width: 7,
+    height: 7,
+    borderRadius: 4,
+    backgroundColor: colors.green,
+    marginRight: 8,
+  },
+  statusText: {
+    fontFamily: fonts.mono,
+    fontSize: 10,
+    letterSpacing: 1.5,
+    color: colors.faded,
+  },
+  statusSep: {
+    fontFamily: fonts.mono,
+    fontSize: 10,
+    color: colors.muted,
+    marginHorizontal: 10,
   },
   content: {
     width: '100%',
@@ -101,8 +141,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
   },
   footer: {
-    marginTop: 40,
-    fontSize: 12,
+    marginTop: 36,
+    fontFamily: fonts.mono,
+    fontSize: 11,
     color: colors.muted,
     textAlign: 'center',
     paddingHorizontal: 20,
