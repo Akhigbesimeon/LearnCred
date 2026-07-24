@@ -1,0 +1,2 @@
+# LearnCred Platfrom
+LearnCred is a decentralized credentialing platform operating within the Education and Identity Management application areas. When a student completes a technical curriculum or demonstrates mastery in your digital learning environment, the platform issues a verifiable credential directly to the student's digital wallet.
