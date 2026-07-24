@@ -1,4 +1,5 @@
 import { StyleSheet, Text, View } from 'react-native';
+import { fonts } from '../theme';
 
 export type Status = {
   kind: 'success' | 'error' | 'pending';
@@ -6,9 +7,9 @@ export type Status = {
 };
 
 const tones: Record<Status['kind'], { bg: string; border: string; fg: string }> = {
-  success: { bg: '#ECFDF5', border: '#A7F3D0', fg: '#065F46' },
-  error: { bg: '#FEF2F2', border: '#FECACA', fg: '#991B1B' },
-  pending: { bg: '#EEF2FF', border: '#C7D2FE', fg: '#3730A3' },
+  success: { bg: 'rgba(70,201,137,0.10)', border: 'rgba(70,201,137,0.35)', fg: '#63D69C' },
+  error: { bg: 'rgba(224,101,83,0.10)', border: 'rgba(224,101,83,0.35)', fg: '#E8836F' },
+  pending: { bg: 'rgba(217,164,74,0.10)', border: 'rgba(217,164,74,0.35)', fg: '#E0B265' },
 };
 
 export default function StatusBanner({ status }: { status: Status | null }) {
@@ -25,14 +26,14 @@ export default function StatusBanner({ status }: { status: Status | null }) {
 const styles = StyleSheet.create({
   box: {
     marginTop: 20,
-    paddingVertical: 14,
-    paddingHorizontal: 16,
-    borderRadius: 12,
+    paddingVertical: 11,
+    paddingHorizontal: 14,
+    borderRadius: 6,
     borderWidth: 1,
   },
   text: {
-    fontSize: 14,
-    fontWeight: '600',
+    fontFamily: fonts.mono,
+    fontSize: 13,
     textAlign: 'center',
   },
 });
