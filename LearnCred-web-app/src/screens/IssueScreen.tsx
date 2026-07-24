@@ -51,7 +51,7 @@ export default function IssueScreen() {
   }
 
   return (
-    <View style={ui.card}>
+    <View style={ui.panel}>
       <Text style={ui.title}>Issue a record</Text>
       <Text style={ui.subtitle}>
         Writes a permanent entry to the student's wallet. Takes about 15 seconds on Sepolia.
@@ -60,7 +60,7 @@ export default function IssueScreen() {
       <View style={styles.field}>
         <Text style={ui.label}>Recipient address</Text>
         <TextInput
-          style={[ui.input, ui.mono]}
+          style={ui.input}
           placeholder="0x…"
           placeholderTextColor={colors.muted}
           value={student}
@@ -82,7 +82,7 @@ export default function IssueScreen() {
       </View>
 
       <View style={styles.row}>
-        <View style={[styles.field, { flex: 1, marginRight: 16 }]}>
+        <View style={[styles.field, { flex: 1, marginRight: 14 }]}>
           <Text style={ui.label}>Skill</Text>
           <TextInput
             style={ui.input}
@@ -119,7 +119,7 @@ export default function IssueScreen() {
 
 const styles = StyleSheet.create({
   field: {
-    marginBottom: 22,
+    marginBottom: 20,
   },
   row: {
     flexDirection: 'row',
