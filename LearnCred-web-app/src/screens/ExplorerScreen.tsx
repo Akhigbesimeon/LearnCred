@@ -3,7 +3,7 @@ import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-nativ
 import { fetchCredentials, isAddress, type Credential } from '../contract';
 import CredentialCard from '../components/CredentialCard';
 import StatusBanner, { type Status } from '../components/StatusBanner';
-import { colors, ui } from '../theme';
+import { colors, fonts, ui } from '../theme';
 
 export default function ExplorerScreen() {
   const [address, setAddress] = useState('');
@@ -34,9 +34,9 @@ export default function ExplorerScreen() {
 
   return (
     <View style={ui.card}>
-      <Text style={ui.title}>Credential explorer</Text>
+      <Text style={ui.title}>Look up a record</Text>
       <Text style={ui.subtitle}>
-        Paste a student's wallet address to see every credential issued to it.
+        Paste a student's wallet address to see the credentials issued to it.
       </Text>
 
       <View style={styles.searchRow}>
@@ -48,14 +48,13 @@ export default function ExplorerScreen() {
           onChangeText={setAddress}
           autoCapitalize="none"
           autoCorrect={false}
-          onSubmitEditing={lookUp}
         />
         <TouchableOpacity
-          style={[styles.searchButton, busy && styles.buttonDisabled]}
+          style={[ui.button, busy && ui.buttonDisabled]}
           onPress={lookUp}
           disabled={busy}
         >
-          <Text style={styles.searchButtonText}>{busy ? 'Checking…' : 'Look up'}</Text>
+          <Text style={ui.buttonText}>{busy ? 'Checking…' : 'Look up'}</Text>
         </TouchableOpacity>
       </View>
 
@@ -64,18 +63,18 @@ export default function ExplorerScreen() {
       <View style={styles.divider} />
 
       {creds.length === 0 ? (
-        <View style={styles.emptyBox}>
+        <View style={styles.emptySlot}>
           <Text style={styles.emptyText}>
-            {searched ? 'No credentials on record for that address.' : 'Results show up here.'}
+            {searched ? 'No entries for that address.' : 'Look up an address to see its entries.'}
           </Text>
         </View>
       ) : (
         <View style={styles.results}>
           <Text style={styles.resultsHeader}>
-            {creds.length} credential{creds.length === 1 ? '' : 's'}
+            {creds.length} {creds.length === 1 ? 'entry' : 'entries'} on record
           </Text>
           {creds.map((cred, i) => (
-            <CredentialCard key={i} cred={cred} />
+            <CredentialCard key={i} cred={cred} entry={i + 1} />
           ))}
         </View>
       )}
@@ -86,46 +85,34 @@ export default function ExplorerScreen() {
 const styles = StyleSheet.create({
   searchRow: {
     flexDirection: 'row',
-    gap: 12,
-  },
-  searchButton: {
-    backgroundColor: colors.ink,
-    borderRadius: 12,
-    paddingHorizontal: 28,
-    justifyContent: 'center',
-  },
-  searchButtonText: {
-    color: '#fff',
-    fontWeight: '600',
-    fontSize: 15,
-  },
-  buttonDisabled: {
-    opacity: 0.6,
+    gap: 10,
   },
   divider: {
     height: 1,
     backgroundColor: colors.hairline,
-    marginVertical: 36,
+    marginVertical: 32,
   },
-  emptyBox: {
+  emptySlot: {
+    borderWidth: 1,
+    borderStyle: 'dashed',
+    borderColor: colors.line,
+    borderRadius: 6,
     padding: 32,
-    borderRadius: 16,
-    backgroundColor: colors.paper,
     alignItems: 'center',
   },
   emptyText: {
     color: colors.muted,
-    fontSize: 15,
-    fontWeight: '500',
+    fontSize: 14,
   },
   results: {
-    gap: 20,
+    gap: 16,
   },
   resultsHeader: {
-    fontSize: 14,
-    fontWeight: '700',
-    color: colors.slate,
+    fontFamily: fonts.mono,
+    fontSize: 11,
+    letterSpacing: 1.5,
+    color: colors.faded,
     textTransform: 'uppercase',
-    letterSpacing: 0.5,
+    marginBottom: 4,
   },
 });
