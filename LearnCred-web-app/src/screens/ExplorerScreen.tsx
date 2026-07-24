@@ -33,7 +33,7 @@ export default function ExplorerScreen() {
   }
 
   return (
-    <View style={ui.card}>
+    <View style={ui.panel}>
       <Text style={ui.title}>Look up a record</Text>
       <Text style={ui.subtitle}>
         Paste a student's wallet address to see the credentials issued to it.
@@ -41,7 +41,7 @@ export default function ExplorerScreen() {
 
       <View style={styles.searchRow}>
         <TextInput
-          style={[ui.input, ui.mono, { flex: 1 }]}
+          style={[ui.input, { flex: 1 }]}
           placeholder="0x…"
           placeholderTextColor={colors.muted}
           value={address}
@@ -65,13 +65,13 @@ export default function ExplorerScreen() {
       {creds.length === 0 ? (
         <View style={styles.emptySlot}>
           <Text style={styles.emptyText}>
-            {searched ? 'No entries for that address.' : 'Look up an address to see its entries.'}
+            {searched ? '// no entries for that address' : '// look up an address to see its entries'}
           </Text>
         </View>
       ) : (
         <View style={styles.results}>
           <Text style={styles.resultsHeader}>
-            {creds.length} {creds.length === 1 ? 'entry' : 'entries'} on record
+            {creds.length} {creds.length === 1 ? 'entry' : 'entries'} found
           </Text>
           {creds.map((cred, i) => (
             <CredentialCard key={i} cred={cred} entry={i + 1} />
@@ -90,29 +90,30 @@ const styles = StyleSheet.create({
   divider: {
     height: 1,
     backgroundColor: colors.hairline,
-    marginVertical: 32,
+    marginVertical: 28,
   },
   emptySlot: {
     borderWidth: 1,
     borderStyle: 'dashed',
     borderColor: colors.line,
-    borderRadius: 6,
-    padding: 32,
+    borderRadius: 8,
+    padding: 30,
     alignItems: 'center',
   },
   emptyText: {
+    fontFamily: fonts.mono,
+    fontSize: 13,
     color: colors.muted,
-    fontSize: 14,
   },
   results: {
-    gap: 16,
+    gap: 14,
   },
   resultsHeader: {
     fontFamily: fonts.mono,
-    fontSize: 11,
+    fontSize: 10,
     letterSpacing: 1.5,
-    color: colors.faded,
     textTransform: 'uppercase',
-    marginBottom: 4,
+    color: colors.faded,
+    marginBottom: 2,
   },
 });
