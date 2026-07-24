@@ -2,25 +2,26 @@ import { useState } from 'react';
 import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import ExplorerScreen from './src/screens/ExplorerScreen';
 import IssueScreen from './src/screens/IssueScreen';
-import { colors } from './src/theme';
+import { colors, fonts } from './src/theme';
 
 export default function App() {
-  const [tab, setTab] = useState<'explorer' | 'issue'>('explorer');
+  const [tab, setTab] = useState<'lookup' | 'issue'>('lookup');
 
   return (
     <ScrollView contentContainerStyle={styles.page}>
-      <View style={styles.nav}>
-        <Text style={styles.brand}>
-          Learn<Text style={styles.brandAccent}>Cred</Text>
-        </Text>
+      <View style={styles.header}>
+        <View>
+          <Text style={styles.wordmark}>LearnCred</Text>
+          <Text style={styles.eyebrow}>CREDENTIAL REGISTRY · SEPOLIA</Text>
+        </View>
 
         <View style={styles.tabs}>
           <TouchableOpacity
-            style={[styles.tab, tab === 'explorer' && styles.tabActive]}
-            onPress={() => setTab('explorer')}
+            style={[styles.tab, tab === 'lookup' && styles.tabActive]}
+            onPress={() => setTab('lookup')}
           >
-            <Text style={[styles.tabLabel, tab === 'explorer' && styles.tabLabelActive]}>
-              Explorer
+            <Text style={[styles.tabLabel, tab === 'lookup' && styles.tabLabelActive]}>
+              Look up
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
@@ -35,8 +36,12 @@ export default function App() {
       </View>
 
       <View style={styles.content}>
-        {tab === 'explorer' ? <ExplorerScreen /> : <IssueScreen />}
+        {tab === 'lookup' ? <ExplorerScreen /> : <IssueScreen />}
       </View>
+
+      <Text style={styles.footer}>
+        Every record here is public — anyone can verify it on Sepolia.
+      </Text>
     </ScrollView>
   );
 }
@@ -46,53 +51,60 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     backgroundColor: colors.paper,
     alignItems: 'center',
-    paddingBottom: 80,
+    paddingBottom: 64,
   },
-  nav: {
+  header: {
     width: '100%',
-    maxWidth: 800,
+    maxWidth: 720,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingHorizontal: 16,
-    paddingVertical: 32,
-    marginBottom: 10,
+    alignItems: 'flex-end',
+    paddingHorizontal: 20,
+    paddingTop: 36,
+    paddingBottom: 28,
   },
-  brand: {
-    fontSize: 26,
-    fontWeight: '900',
+  wordmark: {
+    fontFamily: fonts.serif,
+    fontSize: 28,
     color: colors.ink,
-    letterSpacing: -0.5,
   },
-  brandAccent: {
-    color: colors.indigo,
+  eyebrow: {
+    fontFamily: fonts.mono,
+    fontSize: 10,
+    letterSpacing: 2,
+    color: colors.green,
+    marginTop: 4,
   },
   tabs: {
     flexDirection: 'row',
-    backgroundColor: colors.line,
-    borderRadius: 30,
-    padding: 4,
+    gap: 24,
   },
   tab: {
-    paddingVertical: 8,
-    paddingHorizontal: 20,
-    borderRadius: 26,
+    paddingBottom: 6,
+    borderBottomWidth: 2,
+    borderBottomColor: 'transparent',
   },
   tabActive: {
-    backgroundColor: '#fff',
-    boxShadow: '0 2px 4px rgba(0, 0, 0, 0.05)',
+    borderBottomColor: colors.green,
   },
   tabLabel: {
-    color: colors.faded,
-    fontSize: 14,
+    fontSize: 15,
     fontWeight: '600',
+    color: colors.faded,
   },
   tabLabelActive: {
     color: colors.ink,
   },
   content: {
     width: '100%',
-    maxWidth: 800,
-    paddingHorizontal: 16,
+    maxWidth: 720,
+    paddingHorizontal: 20,
+  },
+  footer: {
+    marginTop: 40,
+    fontSize: 12,
+    color: colors.muted,
+    textAlign: 'center',
+    paddingHorizontal: 20,
   },
 });
