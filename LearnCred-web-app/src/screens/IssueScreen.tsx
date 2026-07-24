@@ -52,9 +52,9 @@ export default function IssueScreen() {
 
   return (
     <View style={ui.card}>
-      <Text style={ui.title}>Issue a credential</Text>
+      <Text style={ui.title}>Issue a record</Text>
       <Text style={ui.subtitle}>
-        Writes a permanent record to the student's wallet. Takes ~15 seconds on Sepolia.
+        Writes a permanent entry to the student's wallet. Takes about 15 seconds on Sepolia.
       </Text>
 
       <View style={styles.field}>
@@ -105,11 +105,11 @@ export default function IssueScreen() {
       </View>
 
       <TouchableOpacity
-        style={[styles.submit, busy && styles.submitDisabled]}
+        style={[ui.button, styles.submit, busy && ui.buttonDisabled]}
         onPress={submit}
         disabled={busy}
       >
-        <Text style={styles.submitText}>{busy ? 'Signing…' : 'Issue credential'}</Text>
+        <Text style={ui.buttonText}>{busy ? 'Signing…' : 'Issue record'}</Text>
       </TouchableOpacity>
 
       <StatusBanner status={status} />
@@ -119,25 +119,12 @@ export default function IssueScreen() {
 
 const styles = StyleSheet.create({
   field: {
-    marginBottom: 24,
+    marginBottom: 22,
   },
   row: {
     flexDirection: 'row',
   },
   submit: {
-    backgroundColor: colors.indigo,
-    borderRadius: 12,
-    paddingVertical: 16,
-    alignItems: 'center',
-    marginTop: 8,
-    boxShadow: '0 4px 8px rgba(79, 70, 229, 0.2)',
-  },
-  submitDisabled: {
-    opacity: 0.6,
-  },
-  submitText: {
-    color: '#fff',
-    fontWeight: '700',
-    fontSize: 16,
+    marginTop: 6,
   },
 });
