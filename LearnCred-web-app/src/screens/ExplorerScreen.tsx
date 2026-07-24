@@ -65,7 +65,7 @@ export default function ExplorerScreen() {
       {creds.length === 0 ? (
         <View style={styles.emptySlot}>
           <Text style={styles.emptyText}>
-            {searched ? '// no entries for that address' : '// look up an address to see its entries'}
+            {searched ? '// no entries for that address' : 'look up an address to see its entries'}
           </Text>
         </View>
       ) : (
