@@ -1,7 +1,7 @@
 import { Contract, JsonRpcProvider, Wallet, isAddress } from 'ethers';
 
 // Sepolia address
-export const CONTRACT_ADDRESS = '0xe67dF2eEbb3E51F03e280789F5b9F0f4597f6a09';
+export const CONTRACT_ADDRESS = '0x04d8c8eC082487e1c3e84A5dD5a99Eb0603b7539';
 
 const RPC_URL = 'https://ethereum-sepolia-rpc.publicnode.com';
 
