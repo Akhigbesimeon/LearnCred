@@ -242,6 +242,10 @@ Real issues hit during development, and their fixes:
 
 LearnCred shifts identity control from legacy institutions into the hands of students, translating self-taught excellence into accessible technical careers, regardless of socioeconomic background.
 
-## 👤 Author
+## Sources Citation
+
+* **Gemini:** Used for debugging and readings
+
+## Author
 
 **Akhigbe Simeon** — African Leadership University
